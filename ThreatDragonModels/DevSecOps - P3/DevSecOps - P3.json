@@ -33,8 +33,8 @@
                 "text": "Firma Allsecure"
               }
             },
-            "id": "bdbed5b3-2049-4d52-a170-2e6f77643f89",
             "zIndex": -1,
+            "id": "bdbed5b3-2049-4d52-a170-2e6f77643f89",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Firma Allsecure",
@@ -58,8 +58,8 @@
                 "text": "Externer Service für \nTelefonnummernauflösung (Telco)"
               }
             },
-            "id": "0bb066e5-ad89-4e9b-9511-214af2362853",
             "zIndex": -1,
+            "id": "0bb066e5-ad89-4e9b-9511-214af2362853",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Externer Service für \nTelefonnummernauflösung (Telco)",
@@ -83,8 +83,8 @@
                 "text": "Telefonanbieter"
               }
             },
-            "id": "67ef5110-5c1c-47b1-954e-11507be6cf0b",
             "zIndex": -1,
+            "id": "67ef5110-5c1c-47b1-954e-11507be6cf0b",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Telefonanbieter",
@@ -171,10 +171,25 @@
                   "new": false,
                   "number": 101,
                   "score": "28"
+                },
+                {
+                  "id": "239e7d2d-fb3a-4808-b1af-38c0c64bb895",
+                  "title": "Elevation of Privilege",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Elevation of privilege",
+                  "description": "Benutzer kann nach Login durch Misskonfiguration Adminrechte erlangen.\nAngriffsvektor:\nNutzer loggt sich mit seinem Account ein und kann sich durch falsch gesetzten Zugriffsschutz erhöhte Rechte geben.\nCAPEC-180: Exploiting Incorrectly Configured Access Control Security Levels\nT1098.003: Account Manipulation - Additional Cloud Roles\nD: 10/ R: 10/ E: 9/ A:10/ DREA: 39",
+                  "mitigation": "Die Misskonfiguration beheben.\nUmsetzung:\nZugriffsdomänen aufstellen und Konfigurationsdateien für den Systemzugriff der Nutzer anpassen.\nD: 10/R: 10/E: 0/A: 10/DREA: 30\nD3-SCP: System Configuration Permissions",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 104,
+                  "score": "30"
                 }
               ],
               "hasOpenThreats": false,
-              "isWebApplication": null
+              "isWebApplication": null,
+              "handlesCardPayment": null,
+              "handlesGoodsOrServices": null
             }
           },
           {
@@ -207,12 +222,29 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "threats": [],
+              "threats": [
+                {
+                  "id": "951b676d-76b3-45aa-92e6-8158a54fe148",
+                  "title": "Tampering",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "type": "Tampering",
+                  "description": "Ein Angreifer manipuliert die Auth Challenge, so dass der 2FA-Service diese als bestanden wertet\nAngriffsvektor:\nEin Angreifer erstellt eine positive Response des OTT-Services, um sich beim 2FA-Service zu verifizieren.\nCAPEC-272: Protocol Manipulation\nT1649: Steal or Forge Authentication Certificates\nD: 10/R: 1/E: 1/A: 2/ DREA: 15",
+                  "mitigation": "Das Nutzerverhalten von IPs wird geloggt und überprüft.\nUmsetzung:\nSystem überprüft Reputation einer IP. Falls drastische Änderungen im Benutzerverhalten oder Sicherheitsrelevante Änderungen vorgenommen werden, blockiert das System den Account und leitet weitere Schritte ein.\nD: 2/R: 1/E: 1/A: 1/ DREA: 5\nD3-IPRA: IP Reputation Analysis",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 106,
+                  "score": "5"
+                }
+              ],
               "hasOpenThreats": false,
               "isBidirectional": false,
               "protocol": "",
               "isEncrypted": false,
-              "isPublicNetwork": false
+              "isPublicNetwork": false,
+              "handlesCardPayment": null,
+              "handlesGoodsOrServices": null,
+              "isWebApplication": null
             }
           },
           {
@@ -575,113 +607,6 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Telefonnummer, OTT",
-              "description": "",
-              "outOfScope": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "isTrustBoundary": false
-            },
-            "id": "10939d18-1017-4b86-841d-9f5394f83f90",
-            "labels": [
-              {
-                "position": {
-                  "distance": 0.4667551402818713,
-                  "offset": -12.917577739081434
-                },
-                "attrs": {
-                  "label": {
-                    "text": "Antwort"
-                  }
-                }
-              }
-            ],
-            "source": {
-              "cell": "ebc88767-2bed-409f-b854-efadec206ba8"
-            },
-            "target": {
-              "cell": "ea3facaa-af62-42fc-8355-1b145385e180"
-            },
-            "vertices": [
-              {
-                "x": 1265,
-                "y": 105
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "2. Weiterleitung\nTelefonnummer",
-              "description": "",
-              "outOfScope": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "id": "342fbf28-ab10-44e4-8221-e5ad5a7a650b",
-            "source": {
-              "cell": "ea3facaa-af62-42fc-8355-1b145385e180"
-            },
-            "target": {
-              "cell": "ebc88767-2bed-409f-b854-efadec206ba8"
-            },
-            "labels": [
-              "2. Weiterleitung\nTelefonnummer"
-            ],
-            "vertices": [
-              {
-                "x": 1180,
-                "y": 30
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
               "name": "Management-Report",
               "description": "",
               "outOfScope": false,
@@ -694,57 +619,15 @@
               "threats": []
             },
             "id": "bf0343c7-8800-4ac9-9012-7dcb9a7aeb7e",
+            "labels": [
+              "Management-Report"
+            ],
             "source": {
               "cell": "c2716661-ef88-48a8-8d0f-724e1923d562"
             },
             "target": {
               "cell": "7cc79a71-97b6-4290-92ca-178676062917"
-            },
-            "labels": [
-              "Management-Report"
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Email(Management-Report, \nSignatur)",
-              "description": "",
-              "outOfScope": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "id": "7da8d002-c931-411c-862c-fcd1c43cff81",
-            "source": {
-              "cell": "7cc79a71-97b6-4290-92ca-178676062917"
-            },
-            "target": {
-              "cell": "858248d1-9150-441e-9b7d-708502d79cfa"
-            },
-            "labels": [
-              "Email(Management-Report, \nSignatur)"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -778,15 +661,15 @@
               "threats": []
             },
             "id": "5c18fc98-8bf2-48f8-87fb-6014a46e27f2",
+            "labels": [
+              "Log(Login, OTT, Phone Number)"
+            ],
             "source": {
               "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
             },
             "target": {
               "cell": "c2716661-ef88-48a8-8d0f-724e1923d562"
-            },
-            "labels": [
-              "Log(Login, OTT, Phone Number)"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -820,15 +703,15 @@
               "threats": []
             },
             "id": "e4d7c94b-9f5e-4782-82e5-edcbe2125c6d",
+            "labels": [
+              "Bedrohungsmodell Update"
+            ],
             "source": {
               "cell": "7cc79a71-97b6-4290-92ca-178676062917"
             },
             "target": {
               "cell": "4efc29d1-1a43-4ef3-b8d8-979fdbb27e3a"
             },
-            "labels": [
-              "Bedrohungsmodell Update"
-            ],
             "vertices": [
               {
                 "x": 310,
@@ -928,15 +811,15 @@
               "threats": []
             },
             "id": "f524c777-09f4-4034-88bd-450e7ff9f15b",
+            "labels": [
+              "OTT"
+            ],
             "source": {
               "cell": "fd7303e8-29d2-4d76-bf7d-87eb619ede69"
             },
             "target": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
-            "labels": [
-              "OTT"
-            ],
             "vertices": [
               {
                 "x": 580,
@@ -1027,15 +910,15 @@
               "threats": []
             },
             "id": "edbd7bd1-b9a5-4ba5-8c75-9aeb445366b2",
+            "labels": [
+              "OTT"
+            ],
             "source": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
             "target": {
               "cell": "f7541499-5c59-4e0e-93ed-9c14249bb148"
             },
-            "labels": [
-              "OTT"
-            ],
             "vertices": [
               {
                 "x": 829.27,
@@ -1075,15 +958,15 @@
               "threats": []
             },
             "id": "c82e55f2-9096-4f97-880f-b76231e03bf3",
+            "labels": [
+              "5. OTT"
+            ],
             "source": {
               "cell": "f7541499-5c59-4e0e-93ed-9c14249bb148"
             },
             "target": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
-            "labels": [
-              "5. OTT"
-            ],
             "vertices": [
               {
                 "x": 720,
@@ -1123,15 +1006,15 @@
               "threats": []
             },
             "id": "9ac4f2f5-bc08-4fa3-a9b3-718bcd793793",
+            "labels": [
+              "5. OTT"
+            ],
             "source": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
             "target": {
               "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa"
             },
-            "labels": [
-              "5. OTT"
-            ],
             "vertices": [
               {
                 "x": 351.5,
@@ -1171,15 +1054,15 @@
               "threats": []
             },
             "id": "ce94a84a-3107-4bb8-bd81-f4540fdcf22a",
+            "labels": [
+              "Telefonnummer, OTT"
+            ],
             "source": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
             "target": {
               "cell": "fd7303e8-29d2-4d76-bf7d-87eb619ede69"
             },
-            "labels": [
-              "Telefonnummer, OTT"
-            ],
             "vertices": [
               {
                 "x": 710,
@@ -1219,15 +1102,15 @@
               "threats": []
             },
             "id": "eb8795f0-a7d5-4e06-90c4-3c052a8a93c3",
+            "labels": [
+              "Antwort"
+            ],
             "source": {
               "cell": "ea3facaa-af62-42fc-8355-1b145385e180"
             },
             "target": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
-            "labels": [
-              "Antwort"
-            ],
             "vertices": [
               {
                 "x": 770,
@@ -1267,15 +1150,15 @@
               "threats": []
             },
             "id": "77102ec8-52df-4e53-966a-f6545de775a2",
+            "labels": [
+              "Antwort"
+            ],
             "source": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
             "target": {
               "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
             },
-            "labels": [
-              "Antwort"
-            ],
             "vertices": [
               {
                 "x": 670,
@@ -1315,15 +1198,15 @@
               "threats": []
             },
             "id": "c0215140-cfd4-45de-aba5-ae908cb4ff36",
+            "labels": [
+              "2. Weiterleitung\nTelefonnummer"
+            ],
             "source": {
               "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
             },
             "target": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
-            "labels": [
-              "2. Weiterleitung\nTelefonnummer"
-            ],
             "vertices": [
               {
                 "x": 500,
@@ -1422,15 +1305,15 @@
               "threats": []
             },
             "id": "3ae3d5b3-122a-46b0-81dc-3bea2b4276a1",
+            "labels": [
+              "Erwarteter OTT"
+            ],
             "source": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
             "target": {
               "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa"
-            },
-            "labels": [
-              "Erwarteter OTT"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1520,15 +1403,15 @@
               "threats": []
             },
             "id": "12a3b757-bf17-4c31-8f52-4271290921d2",
+            "labels": [
+              "1. Auth Challenge"
+            ],
             "source": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
             "target": {
               "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
             },
-            "labels": [
-              "1. Auth Challenge"
-            ],
             "vertices": [
               {
                 "x": 770,
@@ -1624,14 +1507,121 @@
               "threats": []
             },
             "id": "063f2ccc-7c9b-4cc6-9821-da0bdd14c9b1",
+            "labels": [
+              "Email(Report)"
+            ],
             "source": {
               "cell": "1aced817-21dc-4264-91ff-087028f3405d"
             },
             "target": {
               "cell": "ea3facaa-af62-42fc-8355-1b145385e180"
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
             },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "2. Weiterleitung\nTelefonnummer",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "id": "342fbf28-ab10-44e4-8221-e5ad5a7a650b",
             "labels": [
-              "Email(Report)"
+              "2. Weiterleitung\nTelefonnummer"
+            ],
+            "source": {
+              "cell": "ea3facaa-af62-42fc-8355-1b145385e180"
+            },
+            "target": {
+              "cell": "ebc88767-2bed-409f-b854-efadec206ba8"
+            },
+            "vertices": [
+              {
+                "x": 1180,
+                "y": 30
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Telefonnummer, OTT",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "isTrustBoundary": false
+            },
+            "id": "10939d18-1017-4b86-841d-9f5394f83f90",
+            "labels": [
+              {
+                "position": {
+                  "distance": 0.4667551402818713,
+                  "offset": -12.917577739081434
+                },
+                "attrs": {
+                  "label": {
+                    "text": "Antwort"
+                  }
+                }
+              }
+            ],
+            "source": {
+              "cell": "ebc88767-2bed-409f-b854-efadec206ba8"
+            },
+            "target": {
+              "cell": "ea3facaa-af62-42fc-8355-1b145385e180"
+            },
+            "vertices": [
+              {
+                "x": 1265,
+                "y": 105
+              }
             ]
           },
           {
@@ -1666,21 +1656,63 @@
               "threats": []
             },
             "id": "3f72df20-e052-403b-af17-b4ddef425fff",
+            "labels": [
+              "Email-Encrypted(Report, Signatur)"
+            ],
             "source": {
               "cell": "ea3facaa-af62-42fc-8355-1b145385e180"
             },
             "target": {
               "cell": "858248d1-9150-441e-9b7d-708502d79cfa"
             },
-            "labels": [
-              "Email-Encrypted(Report, Signatur)"
-            ],
             "vertices": [
               {
                 "x": 560,
                 "y": -47
               }
             ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Email(Management-Report, \nSignatur)",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "id": "7da8d002-c931-411c-862c-fcd1c43cff81",
+            "labels": [
+              "Email(Management-Report, \nSignatur)"
+            ],
+            "source": {
+              "cell": "7cc79a71-97b6-4290-92ca-178676062917"
+            },
+            "target": {
+              "cell": "858248d1-9150-441e-9b7d-708502d79cfa"
+            }
           },
           {
             "position": {
@@ -1826,8 +1858,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "ea3facaa-af62-42fc-8355-1b145385e180",
             "zIndex": 14,
+            "id": "ea3facaa-af62-42fc-8355-1b145385e180",
             "data": {
               "type": "tm.Process",
               "name": "Standard\nKryptographie\nSoftware",
@@ -1839,7 +1871,21 @@
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "d9f30b06-7618-4dc3-8555-60bcb29b6e28",
+                  "title": "Spoofing",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "MitM kann Telefonnummern Spoofen.\nAngriffsvektor:\nMitM kann den Key des Kryptosystems brechen und Weiterleitungen Abfangen, wodurch er volle Kontrolle über die Kommunikation mit dem Telefonnummer-API-Gateways übernimmt.\nCAPEC-384: Application API Message Manipulation via Man-in-the-Middle\nT1071.001: Application Layer Protocol: Web Protocols\nD: 8/R: 10/E: 1/A: 4/ DREA: 23",
+                  "mitigation": "Der Schlüssel wird in regelmäßigen Intervallen ausgetauscht.\nUmsetzung:\nDer Schlüssel wird in 10-minütigen Intervallen ausgetauscht.\nD3-CRO: Credential Rotation\nD: 8/R: 1/E: 1/A: 2/ DREA: 12",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 113,
+                  "score": "12"
+                }
+              ]
             }
           },
           {
@@ -1863,8 +1909,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "f7541499-5c59-4e0e-93ed-9c14249bb148",
             "zIndex": 15,
+            "id": "f7541499-5c59-4e0e-93ed-9c14249bb148",
             "data": {
               "type": "tm.Process",
               "name": "Allsecure Mobile\nPhone OTT Service",
@@ -1876,7 +1922,21 @@
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "819220e0-af96-4c4d-8abd-860bc6c85bba",
+                  "title": "Denial of Service",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Denial of service",
+                  "description": "Zu viele missgebildete Anfragen gehen an den OTT Service, welche zu lange verarbeitet werden und das System blockieren.\nAngriffsvektor:\nKundentelefon-Anbieter sendet durch eine falsche Softwareversion viele missgebildete Anfragen an den OTT Service.\nCAPEC-490: Amplification\nT1499.003: Endpoint Denial of Service: Application Exhaustion Flood\nD: 10/R: 10/E: 2/A: 10/ DREA: 32",
+                  "mitigation": "Eingehende Anfragen werden auf Anomalien überprüft.\nUmsetzung:\nEin weiterer Dienst (z.B. Firewall) überprüft eingehende Pakete auf Missbildung auf Application Layer Ebene.\nD: 10/R: 3/E: 0/A: 10/ DREA: 23\nD3-CSPP: Client-server Payload Profiling",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 112,
+                  "score": "23"
+                }
+              ]
             }
           },
           {
@@ -1900,8 +1960,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "7cc79a71-97b6-4290-92ca-178676062917",
             "zIndex": 16,
+            "id": "7cc79a71-97b6-4290-92ca-178676062917",
             "data": {
               "type": "tm.Process",
               "name": "Export",
@@ -1913,7 +1973,21 @@
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "869b3fa8-c827-42b0-98c4-f55ae4740bf1",
+                  "title": "Information disclosure",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Information disclosure",
+                  "description": "Angreifer kann Logs ohne Zugriffskontrolle einsehen.\nAngriffsvektor:\nAngreifer kann mittels Fuzzing API-Endunkte oder Ports finden um die darunterliegende Datenbank zu iterieren.\nCAPEC-28: Fuzzing\nT1190: Exploit Public-Facing Application\nD: 8/R: 10/E: 7/A: 10/ DREA: 35",
+                  "mitigation": "Eingehender Datenverkehr wird gefiltert oder komplett blockiert.\nUmsetzung:\nDa der Prozess für unsere aktuelle Funktionalität keine eingehenden Anfragen verarbeiten muss, können diese ausnahmslos blockiert werden.\nD: 8/R: 0/E: 0/A: 10/ DREA: 18\nD3-ITF: Inbound Traffic Filtering",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 105,
+                  "score": "18"
+                }
+              ]
             }
           },
           {
@@ -1937,8 +2011,8 @@
             },
             "visible": true,
             "shape": "actor",
-            "id": "858248d1-9150-441e-9b7d-708502d79cfa",
             "zIndex": 17,
+            "id": "858248d1-9150-441e-9b7d-708502d79cfa",
             "data": {
               "type": "tm.Actor",
               "name": "Management",
@@ -1974,8 +2048,8 @@
             },
             "visible": true,
             "shape": "store",
-            "id": "4efc29d1-1a43-4ef3-b8d8-979fdbb27e3a",
             "zIndex": 18,
+            "id": "4efc29d1-1a43-4ef3-b8d8-979fdbb27e3a",
             "data": {
               "type": "tm.Store",
               "name": "Bedrohungsmodell",
@@ -2012,8 +2086,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "1aced817-21dc-4264-91ff-087028f3405d",
             "zIndex": 19,
+            "id": "1aced817-21dc-4264-91ff-087028f3405d",
             "data": {
               "type": "tm.Process",
               "name": "SIEM-System",
@@ -2025,7 +2099,21 @@
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "cfe6a1b2-0b6b-4983-a3be-3f98910d68ad",
+                  "title": "Repudiation",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "type": "Repudiation",
+                  "description": "Bestimmte Anfragen werden nicht vom SIEM überprüft, wodurch ein potentieller Angreifer seine Aktivitäten verschleiern kann.\nAngriffsvektor:\nDas SIEM System ist für bestimmte Formatierungen falsch konfiguriert, wodurch diese Pakete nicht geprüft oder geloggt werden.\nCAPEC-267: Leveragin Alternate Encoding\nT1027.013: Encrypted/ Encoded File \nD: 3/R: 9/E: 4/A: 1/ DREA: 17",
+                  "mitigation": "Jede Art von Formatierung wird geprüft.\nUmsetzung:\nDas SIEM System wird erweitert, um entsprechende Formatierungen zu überprüfen.\nD: 3/R: 9/E: 0/A: 1/ DREA: 13\nD3-ACH: Application Configuration Hardening",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 110,
+                  "score": "13"
+                }
+              ]
             }
           }
         ],
@@ -2038,7 +2126,7 @@
     ],
     "reviewer": "Georg Neugebauer",
     "diagramTop": 10,
-    "threatTop": 102
+    "threatTop": 113
   },
   "version": "2.1.1"
 }
